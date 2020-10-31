@@ -25,7 +25,7 @@ SECRET_KEY = 'i2fxti^f*v-f*p1kb#ojktm8a)yx3hl&-if5$(i^21mc1s3abd'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1', '0d6cc2b358ae.ngrok.io']
 
 
 # Application definition
@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'images.apps.ImagesConfig',
+    'social_django',
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE = [
@@ -129,3 +132,14 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MEDIA_URL='/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'account.authentication.EmailAuthBackend',
+    'social_core.backends.google.GoogleOAuth2'
+]
+
+THUMBNAIL_DEBUG=True
+
+# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'XXX'
+# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'XXX'

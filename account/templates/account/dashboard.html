@@ -2,8 +2,15 @@
 {% block title %}Рабочий стол{% endblock %}
 {% block content %}
 <h1>Рабочий стол</h1>
-<p>Добро пожаловать на твой рабочий стол.
-Вы можете <a href="{% url 'edit' %}">изменить свой профиль</a> или
-<a href="{% url 'password_change' %}">изменить свой пароль</a></p>
+    {% with total_images_created=request.user.images_created.count %}
+<p>Добро пожаловать на твой рабочий стол. У васть есть вкладки
+    {{ total_images_created }} изображений {{ total_images_created|pluralize }}.</p>
+    {% endwith %}
+
+    <p>Потяните следующую кнопку на панель закладок, чтобы добавить изображения в закладки для других сайтов.</p>
+    <a href="javascript:{% include 'bookmarklet_launcher.js' %}" class="button">
+    Это закладка</a>
+    <p>Тебе может также <a href="{% url 'edit' %}">изменить свой профиль</a> или
+    <a href="{% url 'password_change' %}">изменить свой пароль</a></p>
 {% endblock %}
 
