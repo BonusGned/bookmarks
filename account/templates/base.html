@@ -14,11 +14,14 @@
             <li {% if section == 'dashboard' %} class="selected"{% endif %}>
                 <a href="{% url 'dashboard' %}">Мой рабочий стол</a>
             </li>
+            <li {% if section == "images" %}class="selected"{% endif %}>
+                <a href="{% url "images:list" %}">Картинки</a>
+            </li>
             <li {% if section == 'images' %} class="selected"{% endif %}>
                 <a href="#">Изображения</a>
             </li>
             <li {% if section == 'people' %} class="selected" {% endif %}>
-                <a href="#">Люди</a>
+                <a href="{% url 'user_list' %}">Люди</a>
             </li>
         </ul>
     {% endif %}
@@ -45,24 +48,27 @@
 <div id="content">
     {% block content %}{% endblock %}
 </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-  <script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script>
+
     var csrftoken = Cookies.get('csrftoken');
+
     function csrfSafeMethod(method) {
-      return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
     }
+
     $.ajaxSetup({
-      beforeSend: function(xhr, settings) {
-        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-          xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
         }
-      }
     });
-    $(document).ready(function(){
-      {% block domready %}
-      {% endblock %}
-       });
-  </script>
+    $(document).ready(function () {
+        {% block domready %}
+        {% endblock %}
+    });
+</script>
 </body>
 </html>
