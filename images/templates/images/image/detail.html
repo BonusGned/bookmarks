@@ -47,7 +47,6 @@
 
 
 {% block domready %}
-    <script>
         $('a.like').click(function (e) {
             e.preventDefault();
             $.post('{% url "images:like" %}',
@@ -68,7 +67,6 @@
                 }
             );
         });
-    </script>
 {% endblock %}
 
 
