@@ -1,16 +1,27 @@
 {% extends 'base.html' %}
+
 {% block title %}Рабочий стол{% endblock %}
+
 {% block content %}
-<h1>Рабочий стол</h1>
+
+    <h1>Рабочий стол</h1>
     {% with total_images_created=request.user.images_created.count %}
-<p>Добро пожаловать на твой рабочий стол. У васть есть вкладки
-    {{ total_images_created }} изображений {{ total_images_created|pluralize }}.</p>
+        <p>Добро пожаловать на твой рабочий стол. У васть есть вкладки
+            {{ total_images_created }} изображений {{ total_images_created|pluralize }}.</p>
     {% endwith %}
 
     <p>Потяните следующую кнопку на панель закладок, чтобы добавить изображения в закладки для других сайтов.</p>
     <a href="javascript:{% include 'bookmarklet_launcher.js' %}" class="button">
-    Это закладка</a>
+        Это закладка</a>
     <p>Тебе может также <a href="{% url 'edit' %}">изменить свой профиль</a> или
-    <a href="{% url 'password_change' %}">изменить свой пароль</a></p>
+        <a href="{% url 'password_change' %}">изменить свой пароль</a></p>
+    <h2>Что происходит</h2>
+
+    <div id="action-list">
+        {% for action in actions %}
+            {% include "actions/action/detail.html" %}
+        {% endfor %}
+    </div>
+
 {% endblock %}
 
